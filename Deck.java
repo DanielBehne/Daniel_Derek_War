@@ -1,6 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Collections;
 /**
  * Emulate a deck of cards
  *
@@ -45,6 +45,7 @@ public class Deck
      */
     public void shuffle() {
         // To be written
+        Collections.shuffle(cards);
     }
     
     /**
@@ -69,7 +70,8 @@ public class Deck
      * @returns The top card of the deck (at cards index 0)
      */
     public Card dealCardFromDeck() {
-        // To be written 
+        // To be written
+        Card topCard = cards.get(0);
         return null;
     }
     
