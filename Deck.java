@@ -70,7 +70,7 @@ public class Deck
      * @returns The top card of the deck (at cards index 0)
      */
     public Card dealCardFromDeck() {
-        //written
+        //written but needs to deal from each half
         Card topCard = cards.get(0);
         cards.remove(0);
         return topCard;

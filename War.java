@@ -12,13 +12,18 @@ public class War
      * Include your initialization here -- card decks, shuffling, etc
      * Run the event loop after you've done the initializations
      */
-    public War()
+    public War(Deck[] halves)
     {
         // Initializations here...
         Deck cardDeck = new Deck();
         cardDeck.initializeNewDeck();
         cardDeck.shuffle();
         cardDeck.dealDeck();
+        Deck[] halves1 = halves[0];
+        Deck halves2 = halves[1];
+        while (halves1.length > 0) {
+            
+        }
         cardDeck.dealCardFromDeck();
         cardDeck.addCardToDeck(cardToAdd); //need to initialize Card
         // ...then run the event loop
