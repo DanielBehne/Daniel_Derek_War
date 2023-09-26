@@ -18,11 +18,11 @@ public class War
         Deck cardDeck = new Deck();
         cardDeck.initializeNewDeck();
         cardDeck.shuffle();
-        cardDeck.dealDeck();
-        Deck[] halves1 = halves[0];
-        Deck halves2 = halves[1];
-        Deck[] half = cardDeck.getHalves(); //have to get halves from Deck class somehow
-        while (halves1.length > 0) {
+        
+        Deck[] deck = cardDeck.dealDeck();
+        Deck halves1 = deck[0];
+        Deck halves2 = deck[1];
+        while (halves1.size() > 0) {
             
         }
         cardDeck.dealCardFromDeck();
@@ -35,7 +35,7 @@ public class War
      * This is the game's event loop. The code in here should come
      * from the War flowchart you created for this game
      */
-    public void runEventLoop() {
+    public void runEventLoop(Deck) {
         
     }
     
