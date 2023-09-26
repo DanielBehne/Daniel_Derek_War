@@ -12,8 +12,8 @@ public class War
      * Include your initialization here -- card decks, shuffling, etc
      * Run the event loop after you've done the initializations
      */
-    public War(Deck[] halves)
-    {
+    public War()
+    { 
         // Initializations here...
         Deck cardDeck = new Deck();
         cardDeck.initializeNewDeck();
@@ -21,6 +21,7 @@ public class War
         cardDeck.dealDeck();
         Deck[] halves1 = halves[0];
         Deck halves2 = halves[1];
+        Deck[] half = cardDeck.getHalves(); //have to get halves from Deck class somehow
         while (halves1.length > 0) {
             
         }
