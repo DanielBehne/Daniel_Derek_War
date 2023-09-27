@@ -28,14 +28,21 @@ public class War
         cardDeck.dealCardFromDeck();
         cardDeck.addCardToDeck(cardToAdd); //need to initialize Card
         // ...then run the event loop
-        this.runEventLoop();
+        this.runEventLoop(cardDeck);
     }
     
     /**
      * This is the game's event loop. The code in here should come
      * from the War flowchart you created for this game
      */
-    public void runEventLoop(Deck) {
+    public void runEventLoop(Deck cardDeck) {
+        cardDeck.shuffle();
+        cardDeck.dealDeck();
+        while (halves1.length < 52 && halves2.length < 52) {
+            dealCardFromDeck(halves1);
+        }
+        //need to somehow get halves to work & make Card topCard from dealCardFromDeck come here
+        
         
     }
     
