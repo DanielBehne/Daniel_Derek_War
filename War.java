@@ -22,11 +22,10 @@ public class War
         Deck[] deck = cardDeck.dealDeck();
         Deck halves1 = deck[0];
         Deck halves2 = deck[1];
-        while (halves1.size() > 0) {
-            
-        }
-        cardDeck.dealCardFromDeck();
-        cardDeck.addCardToDeck(cardToAdd); //need to initialize Card
+        
+        Card dealtCard = cardDeck.dealCardFromDeck();
+        Card cardtoAdd = dealtCard;
+        cardDeck.addCardToDeck(cardtoAdd); 
         // ...then run the event loop
         this.runEventLoop(cardDeck);
     }
@@ -36,6 +35,7 @@ public class War
      * from the War flowchart you created for this game
      */
     public void runEventLoop(Deck cardDeck) {
+        //do we have to initialize halves1 & 2 here also?
         cardDeck.shuffle();
         cardDeck.dealDeck();
         while (halves1.length < 52 && halves2.length < 52) {
