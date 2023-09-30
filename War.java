@@ -16,15 +16,19 @@ public class War
     { 
         // Initializations here...
         Deck cardDeck = new Deck();
+
         cardDeck.initializeNewDeck();
         cardDeck.shuffle();
-        Deck deck[] = cardDeck.dealDeck();
-        Deck deckHalf1 = deck[0];
-        Deck deckHalf2 = deck[1];
-        while (deckHalf1.length > 0 && deckHalf2.length > 0) {
-            Card dealtCard = cardDeck.dealCardFromDeck();
-            Card dealtCard2 = cardDeck.dealCardFromDeck2();
-            this.runEventLoop(deckHalf1,deckHalf2, dealtCard, dealtCard2);
+
+        Deck dealtDeck[] = cardDeck.dealDeck();
+        Deck deckHalf1 = dealtDeck[0];
+        Deck deckHalf2 = dealtDeck[1];
+
+        int halfLength1 = deckHalf1.getDeckSize();
+        int halfLength2 = deckHalf2.getDeckSize();
+
+        while (halfLength1 > 0 && halfLength2 > 0) {
+            this.runEventLoop(cardDeck, deckHalf1, deckHalf2, halfLength1, halfLength2);
         }
     }
 
@@ -32,16 +36,32 @@ public class War
      * This is the game's event loop. The code in here should come
      * from the War flowchart you created for this game
      */
-    public void runEventLoop(Deck cardDeck) {
-        //do we have to initialize halves1 & 2 here also?
+    public void runEventLoop(Deck cardDeck, Deck deckHalf1, Deck deckHalf2, int halfLength1,int halfLength2) {
         cardDeck.shuffle();
         cardDeck.dealDeck();
-        while (halves1.length < 52 && halves2.length < 52) {
-            dealCardFromDeck(halves1);
+        while (halfLength1 < 52 && halfLength2 < 52) {
+            Card dealtCard = deckHalf1.dealCardFromDeck();
+            Card dealtCard2 = deckHalf2.dealCardFromDeck();
+            int cardRank = dealtCard.getRank();
+            int cardRank2 = dealtCard2.getRank();
+            Card[] playing = {dealtCard, dealtCard2};
+            int n = playing.length;
+            if (cardRank < cardRank2) {
+                Card cpuStack[] = new Card[n];
+                for (int i = 0; i < n; i++) {
+                    cpuStack[i] = playing[i];
+                }
+            }
+            if (cardRank > cardRank2) {
+                Card playerStack[] = new Card[n];
+                for (int i = 0; i < n; i++) {
+                    playerStack[i] = playing[i];
+                }
+            }
         }
-        //need to somehow get halves to work & make Card topCard from dealCardFromDeck come here
-
+       
     }
+
     /**
      * The main method is called when Java starts your program
      */
