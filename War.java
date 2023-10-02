@@ -37,29 +37,25 @@ public class War
      * from the War flowchart you created for this game
      */
     public void runEventLoop(Deck cardDeck, Deck deckHalf1, Deck deckHalf2, int halfLength1,int halfLength2) {
-        cardDeck.shuffle();
-        cardDeck.dealDeck();
-        while (halfLength1 < 52 && halfLength2 < 52) {
-            Card dealtCard = deckHalf1.dealCardFromDeck();
-            Card dealtCard2 = deckHalf2.dealCardFromDeck();
-            int cardRank = dealtCard.getRank();
-            int cardRank2 = dealtCard2.getRank();
-            Card[] playing = {dealtCard, dealtCard2};
-            int n = playing.length;
-            if (cardRank < cardRank2) {
-                Card cpuStack[] = new Card[n];
-                for (int i = 0; i < n; i++) {
-                    cpuStack[i] = playing[i];
-                }
-            }
-            if (cardRank > cardRank2) {
-                Card playerStack[] = new Card[n];
-                for (int i = 0; i < n; i++) {
-                    playerStack[i] = playing[i];
-                }
+        Card dealtCard = deckHalf1.dealCardFromDeck();
+        Card dealtCard2 = deckHalf2.dealCardFromDeck();
+        int cardRank = dealtCard.getRank();
+        int cardRank2 = dealtCard2.getRank();
+        Card[] playing = {dealtCard, dealtCard2};
+        int n = playing.length;
+        if (cardRank < cardRank2) {
+            Card cpuStack[] = new Card[n];
+            for (int i = 0; i < n; i++) {
+                cpuStack[i] = playing[i];
             }
         }
-       
+        if (cardRank > cardRank2) {
+            Card playerStack[] = new Card[n];
+            for (int i = 0; i < n; i++) {
+                playerStack[i] = playing[i];
+            }
+        }
+
     }
 
     /**
