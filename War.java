@@ -54,6 +54,23 @@ public class War
             for (int i = 0; i < n; i++) {
                 playerStack[i] = playing[i];
             }
+        } else {
+            System.out.println("A war has happened!");
+            if (cardRank == cardRank2) {
+                Deck[] threeCards1;
+                Deck[] threeCards2;
+                Card v1 = deckHalf1.dealCardFromDeck();
+                Card v2 = deckHalf1.dealCardFromDeck();
+                Card v3 = deckHalf1.dealCardFromDeck();
+                Card v4 = deckHalf2.dealCardFromDeck();
+                Card v5 = deckHalf2.dealCardFromDeck();
+                Card v6 = deckHalf2.dealCardFromDeck();
+                Card playCard = deckHalf1.dealCardFromDeck();
+                Card playCard2 = deckHalf2.dealCardFromDeck();
+                int playCardRank = playCard.getRank();
+                int playCardRank2 = playCard2.getRank();
+
+            }
         }
 
     }
