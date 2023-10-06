@@ -1,5 +1,3 @@
-
-
 /**
  * War game class
  *
@@ -7,7 +5,6 @@
  * @version 2022-10-19
  */
 import java.util.ArrayList;
-
 
 public class War
 {
@@ -41,6 +38,8 @@ public class War
         ArrayList<Card> list2 = new ArrayList<Card>();
         int warLoop = 1;
         ArrayList<Card> constantWar = new ArrayList<Card>();
+        int list1Size = list1.size();
+        int list2Size = list2.size();
         while (winner == false) {
             Card dealtCard = deckHalf1.dealCardFromDeck();
             Card dealtCard2 = deckHalf2.dealCardFromDeck();
@@ -55,6 +54,15 @@ public class War
             } else {
                 System.out.println("A war has happened!");
                 war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
+            }
+            if (list1Size == 0) {
+                for (Card card : list1) {
+                    deckHalf1.addCardToDeck(card);
+                }
+            } else if (list2Size == 0) {
+                for (Card card : list2) {
+                    deckHalf2.addCardToDeck(card);
+                }
             }
         }
     }
