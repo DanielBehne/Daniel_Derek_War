@@ -27,7 +27,6 @@ public class War
         this.runEventLoop(cardDeck, deckHalf1, deckHalf2, halfLength1, halfLength2);
     }
 
-
     /**
      * This is the game's event loop. The code in here should come
      * from the War flowchart you created for this game
@@ -40,30 +39,40 @@ public class War
         ArrayList<Card> constantWar = new ArrayList<Card>();
         int list1Size = list1.size();
         int list2Size = list2.size();
-        while (winner == false) {
+        while (deckHalf1.getDeckSize() > 0 && deckHalf2.getDeckSize() > 0)  {
             Card dealtCard = deckHalf1.dealCardFromDeck();
+            System.out.println("Card " + dealtCard.getFace() + " of " + dealtCard.getSuit() + " has been put down as a war card");
             Card dealtCard2 = deckHalf2.dealCardFromDeck();
+            System.out.println("Card " + dealtCard2.getFace() + " of " + dealtCard2.getSuit() + " has been put down as a war card");
             int cardRank = dealtCard.getRank();
             int cardRank2 = dealtCard2.getRank();
             if (cardRank > cardRank2) {
+                System.out.println("Player one has won the round");
                 list1.add(dealtCard);
                 list1.add(dealtCard2);
             } else if (cardRank2 > cardRank) {
+                System.out.println("Player two has won the round");
                 list2.add(dealtCard2);
                 list2.add(dealtCard);
             } else {
                 System.out.println("A war has happened!");
                 war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
             }
-            if (list1Size == 0) {
+            if (deckHalf1.getDeckSize() == 0) {
                 for (Card card : list1) {
                     deckHalf1.addCardToDeck(card);
                 }
-            } else if (list2Size == 0) {
+            }
+            if (deckHalf1.getDeckSize() == 0) {
                 for (Card card : list2) {
                     deckHalf2.addCardToDeck(card);
                 }
             }
+        } 
+        if (list1.size() == 0) {
+            System.out.println("Player Two Has Won!");
+        } else {
+            System.out.println("Player One Has Won!");
         }
     }
 
@@ -71,16 +80,16 @@ public class War
     public static void war(Deck deckHalf1, Deck deckHalf2, ArrayList<Card> list1, ArrayList<Card> list2, int cardRank, int cardRank2, ArrayList<Card> constantWar, int warLoop ) {
         if (cardRank == cardRank2) {
             Card v1 = deckHalf1.dealCardFromDeck();
-            constantWar.add(v1);
             Card v2 = deckHalf1.dealCardFromDeck();
-            constantWar.add(v2);
             Card v3 = deckHalf1.dealCardFromDeck();
-            constantWar.add(v3);
             Card v4 = deckHalf2.dealCardFromDeck();
-            constantWar.add(v4);
-            Card v5 = deckHalf2.dealCardFromDeck();
-            constantWar.add(v5);
+            Card v5 = deckHalf2.dealCardFromDeck();;
             Card v6 = deckHalf2.dealCardFromDeck();
+            constantWar.add(v1);
+            constantWar.add(v2);
+            constantWar.add(v3);
+            constantWar.add(v4);
+            constantWar.add(v5);
             constantWar.add(v6);
             Card playCard = deckHalf1.dealCardFromDeck();
             constantWar.add(playCard);
@@ -88,6 +97,9 @@ public class War
             constantWar.add(playCard2);
             int playCardRank = playCard.getRank();
             int playCardRank2 = playCard2.getRank();
+            for (Card element : constantWar) {
+                System.out.println("Card " + element.getFace() + " of " + element.getSuit() + " has been put down as a war card");
+            }
             if (playCardRank > playCardRank2) {
                 for (Card element : constantWar) {
                     list1.add(element);
@@ -109,7 +121,6 @@ public class War
             }
         }
     }
-
 
     /**
      * The main method is called when Java starts your program
