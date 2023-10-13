@@ -40,10 +40,11 @@ public class War
         int list1Size = list1.size();
         int list2Size = list2.size();
         while (deckHalf1.getDeckSize() > 0 && deckHalf2.getDeckSize() > 0)  {
+            System.out.println("    ");
             Card dealtCard = deckHalf1.dealCardFromDeck();
-            System.out.println("Card " + dealtCard.getFace() + " of " + dealtCard.getSuit() + " has been put down as a war card");
+            System.out.println("Card " + dealtCard.getFace() + " of " + dealtCard.getSuit() + " has been dealt.");
             Card dealtCard2 = deckHalf2.dealCardFromDeck();
-            System.out.println("Card " + dealtCard2.getFace() + " of " + dealtCard2.getSuit() + " has been put down as a war card");
+            System.out.println("Card " + dealtCard2.getFace() + " of " + dealtCard2.getSuit() + " has been dealt.");
             int cardRank = dealtCard.getRank();
             int cardRank2 = dealtCard2.getRank();
             if (cardRank > cardRank2) {
@@ -55,6 +56,7 @@ public class War
                 list2.add(dealtCard2);
                 list2.add(dealtCard);
             } else {
+                System.out.println("    ");
                 System.out.println("A war has happened!");
                 war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
             }
@@ -101,19 +103,9 @@ public class War
                 System.out.println("Card " + element.getFace() + " of " + element.getSuit() + " has been put down as a war card");
             }
             if (playCardRank > playCardRank2) {
-                for (Card element : constantWar) {
-                    list1.add(element);
-                    int i = warLoop * 4;
-                    warLoop = 1;
-                    System.out.println("Player one has won gaining " + i + " cards");
-                }
+                System.out.println("Player one has won the war.");
             } else if (playCardRank2 > playCardRank) {
-                for (Card element : constantWar) {
-                    list2.add(element);
-                    int i = warLoop * 4;
-                    warLoop = 1;
-                    System.out.println("Player two has won gaining " + i + " cards");
-                }
+                System.out.println("Player two has won the war.");
             } else {
                 System.out.println("Another war has happened!");
                 warLoop++;
