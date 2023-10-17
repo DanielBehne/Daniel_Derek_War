@@ -18,7 +18,7 @@ public class Deck
     {
         cards = new ArrayList<Card>();
     }
-    
+
     public void initializeNewDeck() {
         String[] suits = {"Hearts","Clubs","Spades","Diamonds"};
         int[] ranks = {2,3,4,5,6,7,8,9,10,11,12,13,14};
@@ -39,7 +39,7 @@ public class Deck
     public int getDeckSize() {
         return cards.size();
     }
-    
+
     /**
      * Shuffles the cards in the deck
      */
@@ -47,7 +47,7 @@ public class Deck
         //written
         Collections.shuffle(cards);
     }
-    
+
     /**
      * Deal all the cards in the deck to make two new decks of cards
      * 
@@ -64,18 +64,23 @@ public class Deck
         }
         return halves;
     }
-    
+
     /**
      * Deal the top card of the deck and remove it from the deck
      * @returns The top card of the deck (at cards index 0)
      */
     public Card dealCardFromDeck() {
         //written but needs to deal from each half
-        Card topCard = cards.get(0);
-        cards.remove(0);
-        return topCard;
+        if (cards.size() != 0) {
+            Card topCard = cards.get(0);
+            cards.remove(0);
+            return topCard;
+        } else {
+            System.out.println("Sorry :( you don't have any more cards!");
+        }
+        return cards.get(0);
     }
-    
+
     /**
      * Adds the provided card to the deck
      * @param cardToAdd: Card to add to this deck
@@ -84,5 +89,5 @@ public class Deck
         //written
         cards.add(cardToAdd);
     }
-    
+
 }

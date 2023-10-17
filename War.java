@@ -62,22 +62,29 @@ public class War
                 System.out.println("    ");
                 war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
             }
-            if (deckHalf1.getDeckSize() == 0) {
+            if (deckHalf1.getDeckSize() == 0 ) {
                 for (Card card : list1) {
                     deckHalf1.addCardToDeck(card);
                 }
+                list1.clear();
             }
-            if (deckHalf1.getDeckSize() == 0) {
+            if (deckHalf2.getDeckSize() == 0) {
                 for (Card card : list2) {
-                    deckHalf2.addCardToDeck(card);
+                    deckHalf2.addCardToDeck(card);                
                 }
+                list2.clear();
             }
             iterations++;
+            System.out.println(iterations);
+            System.out.println("player 1 deck: " + deckHalf1.getDeckSize());
+            System.out.println("player 1 pile: " + list1.size());
+            System.out.println("player 2 deck: " + deckHalf2.getDeckSize());
+            System.out.println("player 2 pile: " + list2.size());
         } 
-        if (list1.size() == 0) {
+        if (deckHalf1.getDeckSize() == 0) {
             System.out.println("Player Two Has Won!");
         }
-        if (list2.size() == 0){
+        if (deckHalf2.getDeckSize() == 0){
             System.out.println("Player One Has Won!");
         }
         if (iterations == 300) {
@@ -85,40 +92,59 @@ public class War
         }
     }
 
-
+    
+    //loses cards during war
     public static void war(Deck deckHalf1, Deck deckHalf2, ArrayList<Card> list1, ArrayList<Card> list2, int cardRank, int cardRank2, ArrayList<Card> constantWar, int warLoop) {
-        if (cardRank == cardRank2) {
-            Card v1 = deckHalf1.dealCardFromDeck();
-            Card v2 = deckHalf1.dealCardFromDeck();
-            Card v3 = deckHalf1.dealCardFromDeck();
-            Card v4 = deckHalf2.dealCardFromDeck();
-            Card v5 = deckHalf2.dealCardFromDeck();;
-            Card v6 = deckHalf2.dealCardFromDeck();
-            constantWar.add(v1);
-            constantWar.add(v2);
-            constantWar.add(v3);
-            constantWar.add(v4);
-            constantWar.add(v5);
-            constantWar.add(v6);
-            Card playCard = deckHalf1.dealCardFromDeck();
-            constantWar.add(playCard);
-            Card playCard2 = deckHalf2.dealCardFromDeck();
-            constantWar.add(playCard2);
-            int playCardRank = playCard.getRank();
-            int playCardRank2 = playCard2.getRank();
-            for (Card element : constantWar) {
-                System.out.println("Card " + element.getFace() + " of " + element.getSuit() + " has been put down as a war card");
+        if (deckHalf1.getDeckSize() < 5 ) {
+            for (Card card : list1) {
+                deckHalf1.addCardToDeck(card);
             }
-            if (playCardRank > playCardRank2) {
-                System.out.println("    ");
-                System.out.println("Player one has won the war.");
-            } else if (playCardRank2 > playCardRank) {
-                System.out.println("    ");
-                System.out.println("Player two has won the war.");
-            } else if (playCardRank == playCardRank2) {
-                System.out.println("Another war has happened!");
-                war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
+            list1.clear();
+        }
+        if (deckHalf2.getDeckSize() < 5) {
+            for (Card card : list2) {
+                deckHalf2.addCardToDeck(card);                
             }
+            list2.clear();
+        }
+        Card v1 = deckHalf1.dealCardFromDeck();
+        Card v2 = deckHalf1.dealCardFromDeck();
+        Card v3 = deckHalf1.dealCardFromDeck();
+        Card v4 = deckHalf2.dealCardFromDeck();
+        Card v5 = deckHalf2.dealCardFromDeck();;
+        Card v6 = deckHalf2.dealCardFromDeck();
+        constantWar.add(v1);
+        constantWar.add(v2);
+        constantWar.add(v3);
+        constantWar.add(v4);
+        constantWar.add(v5);
+        constantWar.add(v6);
+        Card playCard = deckHalf1.dealCardFromDeck();
+        constantWar.add(playCard);
+        Card playCard2 = deckHalf2.dealCardFromDeck();
+        constantWar.add(playCard2);
+        int playCardRank = playCard.getRank();
+        int playCardRank2 = playCard2.getRank();
+        for (Card element : constantWar) {
+            System.out.println("Card " + element.getFace() + " of " + element.getSuit() + " has been put down as a war card");
+        }
+        if (playCardRank > playCardRank2) {
+            System.out.println("    ");
+            System.out.println("Player one has won the war.");
+            for (Card card : constantWar) {
+                list1.add(card);                
+            }
+            constantWar.clear();
+        } else if (playCardRank2 > playCardRank) {
+            System.out.println("    ");
+            System.out.println("Player two has won the war.");
+            for (Card card : constantWar) {
+                list2.add(card);                
+            }
+            constantWar.clear();
+        } else if (playCardRank == playCardRank2) {
+            System.out.println("Another war has happened!");
+            war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
         }
     }
 
@@ -129,8 +155,4 @@ public class War
         War war = new War();
     }
 }
-
-
-
-
 
