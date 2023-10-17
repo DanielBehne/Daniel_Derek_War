@@ -39,6 +39,7 @@ public class War
         ArrayList<Card> constantWar = new ArrayList<Card>();
         int list1Size = list1.size();
         int list2Size = list2.size();
+        int iterations = 0;
         while (deckHalf1.getDeckSize() > 0 && deckHalf2.getDeckSize() > 0)  {
             System.out.println("    ");
             Card dealtCard = deckHalf1.dealCardFromDeck();
@@ -59,7 +60,7 @@ public class War
                 System.out.println("    ");
                 System.out.println("A war has happened!");
                 System.out.println("    ");
-                war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar);
+                war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
             }
             if (deckHalf1.getDeckSize() == 0) {
                 for (Card card : list1) {
@@ -71,16 +72,21 @@ public class War
                     deckHalf2.addCardToDeck(card);
                 }
             }
+            iterations++;
         } 
         if (list1.size() == 0) {
             System.out.println("Player Two Has Won!");
-        } else {
+        }
+        if (list2.size() == 0){
             System.out.println("Player One Has Won!");
+        }
+        if (iterations == 300) {
+            System.out.println("The game has ended.");
         }
     }
 
 
-    public static void war(Deck deckHalf1, Deck deckHalf2, ArrayList<Card> list1, ArrayList<Card> list2, int cardRank, int cardRank2, ArrayList<Card> constantWar) {
+    public static void war(Deck deckHalf1, Deck deckHalf2, ArrayList<Card> list1, ArrayList<Card> list2, int cardRank, int cardRank2, ArrayList<Card> constantWar, int warLoop) {
         if (cardRank == cardRank2) {
             Card v1 = deckHalf1.dealCardFromDeck();
             Card v2 = deckHalf1.dealCardFromDeck();
@@ -109,9 +115,9 @@ public class War
             } else if (playCardRank2 > playCardRank) {
                 System.out.println("    ");
                 System.out.println("Player two has won the war.");
-            } else {
+            } else if (playCardRank == playCardRank2) {
                 System.out.println("Another war has happened!");
-                war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar);
+                war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
             }
         }
     }
