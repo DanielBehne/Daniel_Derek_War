@@ -39,7 +39,7 @@ public class War
         ArrayList<Card> list1 = new ArrayList<Card>();
         ArrayList<Card> list2 = new ArrayList<Card>();
         int warLoop = 1;
-        
+
         int iterations = 0;
 
         while (deckHalf1.getDeckSize() > 0 && deckHalf2.getDeckSize() > 0)  {
@@ -57,16 +57,32 @@ public class War
                 list1.add(dealtCard);
                 list1.add(dealtCard2);
                 iterations++;
+                if (iterations == 300) {
+                    System.out.println("The game has ended.");
+                    break;
+                }
             } else if (cardRank2 > cardRank) {
                 System.out.println("Player two has won the round");
                 list2.add(dealtCard2);
                 list2.add(dealtCard);
                 iterations++;
+                if (iterations == 300) {
+                    System.out.println("The game has ended.");
+                    break;
+                }
             } else {
                 System.out.println("    ");
                 System.out.println("A war has happened!");
                 System.out.println("    ");
-                war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, warLoop);
+                ArrayList<Card> constantWar = new ArrayList<Card>();
+                constantWar.add(dealtCard);
+                constantWar.add(dealtCard2);
+                war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar);
+                iterations++;
+                if (iterations == 300) {
+                    System.out.println("The game has ended.");
+                    break;
+                }
             }
             if (deckHalf1.getDeckSize() == 0 ) {
                 for (Card card : list1) {
@@ -92,14 +108,10 @@ public class War
         if (deckHalf2.getDeckSize() == 0){
             System.out.println("Player One Has Won!");
         }
-        if (iterations == 300) {
-            System.out.println("The game has ended.");
-        }
     }
 
     //loses cards during war
-    public static void war(Deck deckHalf1, Deck deckHalf2, ArrayList<Card> list1, ArrayList<Card> list2, int cardRank, int cardRank2, int warLoop) {
-        ArrayList<Card> constantWar = new ArrayList<Card>();
+    public static void war(Deck deckHalf1, Deck deckHalf2, ArrayList<Card> list1, ArrayList<Card> list2, int cardRank, int cardRank2, ArrayList<Card> constantWar) {
         if (deckHalf1.getDeckSize() < 5 ) {
             for (Card card : list1) {
                 deckHalf1.addCardToDeck(card);
@@ -125,14 +137,17 @@ public class War
         constantWar.add(v5);
         constantWar.add(v6);
         Card playCard = deckHalf1.dealCardFromDeck();
-        constantWar.add(playCard);
+        deckHalf1.addCardToDeck(playCard);
         Card playCard2 = deckHalf2.dealCardFromDeck();
-        constantWar.add(playCard2);
+        deckHalf2.addCardToDeck(playCard2);
         int playCardRank = playCard.getRank();
         int playCardRank2 = playCard2.getRank();
         for (Card element : constantWar) {
             System.out.println("Card " + element.getFace() + " of " + element.getSuit() + " has been put down as a war card");
         }
+        System.out.println("");
+        System.out.println("Card " + playCard.getFace() + " of " + playCard.getSuit() +  " has been put down as the card to compare for player1");
+        System.out.println("Card " + playCard2.getFace() + " of " + playCard2.getSuit() +  " has been put down as the card to compare for player2");
         if (playCardRank > playCardRank2) {
             System.out.println("    ");
             System.out.println("Player one has won the war.");
@@ -151,7 +166,7 @@ public class War
             System.out.println("    ");
             System.out.println("Another war has happened!");
             System.out.println("    ");
-            war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, warLoop);
+            war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar);
         }
     }
 
