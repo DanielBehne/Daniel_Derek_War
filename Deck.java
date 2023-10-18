@@ -75,12 +75,10 @@ public class Deck
             Card topCard = cards.get(0);
             cards.remove(0);
             return topCard;
-        } else {
-            System.out.println("Sorry :( you don't have any more cards!");
-        }
-        return cards.get(0);
+        } 
+        System.out.println("Sorry :( you don't have any more cards!");
+        return null;
     }
-
     /**
      * Adds the provided card to the deck
      * @param cardToAdd: Card to add to this deck

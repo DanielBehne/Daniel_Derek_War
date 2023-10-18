@@ -16,31 +16,35 @@ public class War
     public War()
     {
         // Initializations here...
-        Deck cardDeck = new Deck();
-        cardDeck.initializeNewDeck();
-        cardDeck.shuffle();
-        Deck dealtDeck[] = cardDeck.dealDeck();
-        Deck deckHalf1 = dealtDeck[0];
-        Deck deckHalf2 = dealtDeck[1];
-        int halfLength1 = deckHalf1.getDeckSize();
-        int halfLength2 = deckHalf2.getDeckSize();
-        this.runEventLoop(cardDeck, deckHalf1, deckHalf2, halfLength1, halfLength2);
+
+        this.runEventLoop();
     }
 
     /**
      * This is the game's event loop. The code in here should come
      * from the War flowchart you created for this game
      */
-    public void runEventLoop(Deck cardDeck, Deck deckHalf1, Deck deckHalf2, int halfLength1,int halfLength2) {
+    public void runEventLoop() {
+        Deck cardDeck = new Deck();
+        cardDeck.initializeNewDeck();
+        cardDeck.shuffle();
+
+        Deck dealtDeck[] = cardDeck.dealDeck();
+        Deck deckHalf1 = dealtDeck[0];
+        Deck deckHalf2 = dealtDeck[1];
+        int halfLength1 = deckHalf1.getDeckSize();
+        int halfLength2 = deckHalf2.getDeckSize();
+
         boolean winner = false;
         ArrayList<Card> list1 = new ArrayList<Card>();
         ArrayList<Card> list2 = new ArrayList<Card>();
         int warLoop = 1;
-        ArrayList<Card> constantWar = new ArrayList<Card>();
-        int list1Size = list1.size();
-        int list2Size = list2.size();
+        
         int iterations = 0;
+
         while (deckHalf1.getDeckSize() > 0 && deckHalf2.getDeckSize() > 0)  {
+            int list1Size = list1.size();
+            int list2Size = list2.size();
             System.out.println("    ");
             Card dealtCard = deckHalf1.dealCardFromDeck();
             System.out.println("Card " + dealtCard.getFace() + " of " + dealtCard.getSuit() + " has been dealt.");
@@ -52,15 +56,17 @@ public class War
                 System.out.println("Player one has won the round");
                 list1.add(dealtCard);
                 list1.add(dealtCard2);
+                iterations++;
             } else if (cardRank2 > cardRank) {
                 System.out.println("Player two has won the round");
                 list2.add(dealtCard2);
                 list2.add(dealtCard);
+                iterations++;
             } else {
                 System.out.println("    ");
                 System.out.println("A war has happened!");
                 System.out.println("    ");
-                war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
+                war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, warLoop);
             }
             if (deckHalf1.getDeckSize() == 0 ) {
                 for (Card card : list1) {
@@ -74,8 +80,7 @@ public class War
                 }
                 list2.clear();
             }
-            iterations++;
-            System.out.println(iterations);
+            System.out.println("Round number: " + iterations);
             System.out.println("player 1 deck: " + deckHalf1.getDeckSize());
             System.out.println("player 1 pile: " + list1.size());
             System.out.println("player 2 deck: " + deckHalf2.getDeckSize());
@@ -92,9 +97,9 @@ public class War
         }
     }
 
-    
     //loses cards during war
-    public static void war(Deck deckHalf1, Deck deckHalf2, ArrayList<Card> list1, ArrayList<Card> list2, int cardRank, int cardRank2, ArrayList<Card> constantWar, int warLoop) {
+    public static void war(Deck deckHalf1, Deck deckHalf2, ArrayList<Card> list1, ArrayList<Card> list2, int cardRank, int cardRank2, int warLoop) {
+        ArrayList<Card> constantWar = new ArrayList<Card>();
         if (deckHalf1.getDeckSize() < 5 ) {
             for (Card card : list1) {
                 deckHalf1.addCardToDeck(card);
@@ -143,8 +148,10 @@ public class War
             }
             constantWar.clear();
         } else if (playCardRank == playCardRank2) {
+            System.out.println("    ");
             System.out.println("Another war has happened!");
-            war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, constantWar, warLoop);
+            System.out.println("    ");
+            war(deckHalf1, deckHalf2, list1, list2, cardRank, cardRank2, warLoop);
         }
     }
 
